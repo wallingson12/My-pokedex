@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokédex</title>
+    <style>
+        /* Estilos para o body (cor de fundo e fonte) */
+        body {
+            background-image: url("/static/imagens/floresta.jpg");
+            display: flex;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos para o container principal */
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 10px;
+            background-color: rgba(204, 204, 204, 0.8);
+            border-radius: 1px;
+            box-shadow: 0 0 20px rgba(204, 204, 204, 0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Estilos para o título h1 */
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para o formulário */
+        form {
+            text-align: center;
+        }
+
+        /* Estilos para o label */
+        label {
+            display: inline-block;
+            width: 250px;
+            text-align: left;
+            margin-right: 10px;
+        }
+
+        /* Estilos para o input de texto */
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Estilos para o botão */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos para o botão quando passa o mouse por cima */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para a div pokemon-info */
+        .pokemon-info {
+            text-align: center; /* Centraliza o conteúdo horizontalmente */
+            margin-top: 20px; /* Define a margem superior */
+        }
+
+        /* Estilos para a imagem do Pokémon */
+        .pokemon-image {
+            max-width: 300px;
+            margin-top: 20px;
+        }
+
+        /* Estilos para a mensagem de erro */
+        .message {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pokédex</h1>
+        <form action="/buscar" method="post">
+            <label for="nome">Digite o nome do Pokémon:</label>
+            <input type="text" id="nome" name="nome">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- Exibição do Pokémon encontrado -->
+        {% if pokemon %}
+        <div class="pokemon-info">
+            <h2>{{ pokemon.nome }}</h2>
+            {% if pokemon.tipo %}
+            <p>Tipo: {{ pokemon.tipo }}</p>
+            {% endif %}
+            {% if pokemon.foto %}
+            <img src="{{ pokemon.foto }}" alt="{{ pokemon.nome }}" class="pokemon-image">
+            {% else %}
+            <p class="message">Imagem não disponível</p>
+            {% endif %}
+        </div>
+        <!-- Exibição da mensagem de erro -->
+        {% elif message %}
+        <p class="message">{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
