@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
+# app = Flask(__name__)
 
 def obter_tipo_pokemon(nome_pokemon):
     url = f"https://pokeapi.co/api/v2/pokemon/{nome_pokemon}"
