@@ -16,7 +16,7 @@ def obter_tipo_pokemon(nome_pokemon):
 
 @app.route("/")
 def pokedex():
-    return render_template('index.html', pokemon=None, message=None)
+    return render_template('pokedex.html', pokemon=None, message=None)
 
 @app.route("/buscar", methods=["POST"])
 def buscar():
