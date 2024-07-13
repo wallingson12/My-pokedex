@@ -9,11 +9,12 @@
             display: flex;
             background-repeat: no-repeat;
             background-size: cover;
-            background-position: top center;
+            background-position: center;
             font-family: Arial, sans-serif;
             color: #333;
             margin: 0;
             padding: 0;
+            min-height: 100vh; /* Garante que o body sempre ocupe pelo menos 100% da altura da tela */
         }
 
         /* Estilos para o container principal */
@@ -28,6 +29,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            box-sizing: border-box; /* Inclui padding e border no tamanho total do elemento */
         }
 
         /* Estilos para o título h1 */
@@ -51,10 +53,12 @@
 
         /* Estilos para o input de texto */
         input[type="text"] {
-            width: 300px;
+            width: 100%; /* Define a largura total para responsividade */
+            max-width: 300px; /* Limita a largura máxima */
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box; /* Inclui padding e border no tamanho total do elemento */
         }
 
         /* Estilos para o botão */
@@ -81,7 +85,7 @@
 
         /* Estilos para a imagem do Pokémon */
         .pokemon-image {
-            max-width: 300px;
+            max-width: 100%; /* Define a largura máxima para responsividade */
             margin-top: 20px;
         }
 
