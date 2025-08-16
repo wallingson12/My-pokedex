@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 
 app = Flask(__name__, template_folder="templates")
@@ -10,18 +10,33 @@ def obter_dados_pokemon(nome_pokemon):
         return response.json()
     return None
 
-@app.route("/")
-def pokedex():
+@app.route("/home")
+def home():
     return render_template('pokedex.html', pokemon=None, message=None)
 
-@app.route("/buscar", methods=["POST"])
+@app.route("/buscar", methods=["POST", "GET"])
 def buscar():
+    if request.method == "GET":
+        return redirect(url_for('home'))
+
     try:
-        pokemon_name = request.form["nome"].lower()
+        pokemon_name = request.form.get("nome", "").strip().lower()
+        if not pokemon_name:
+            return render_template(
+                'pokedex.html',
+                pokemon=None,
+                message="Por favor, digite o nome de um Pokémon.",
+                home_link=url_for('home')
+            )
         pokemon_data = obter_dados_pokemon(pokemon_name)
 
         if not pokemon_data:
-            return render_template('pokedex.html', pokemon=None, message="Pokémon não encontrado!")
+            return render_template(
+                'pokedex.html',
+                pokemon=None,
+                message="Pokémon não encontrado!",
+                home_link=url_for('home')
+            )
 
         # Monta dados do Pokémon
         pokemon_id = pokemon_data['id']
@@ -38,10 +53,20 @@ def buscar():
             'cry': cry_url
         }
 
-        return render_template('pokedex.html', pokemon=pokemon, message=None)
+        return render_template(
+            'pokedex.html',
+            pokemon=pokemon,
+            message=None,
+            home_link=url_for('home')
+        )
 
     except Exception as e:
-        return render_template('pokedex.html', pokemon=None, message=f"Erro ao buscar o Pokémon: {str(e)}")
+        return render_template(
+            'pokedex.html',
+            pokemon=None,
+            message=f"Erro ao buscar o Pokémon: {str(e)}",
+            home_link=url_for('home')
+        )
 
 if __name__ == "__main__":
     app.run(debug=True)
