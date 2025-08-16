@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Pokédex</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>Pokedex</header>
+
+<div class="container" role="region" aria-label="Busca de Pokémon">
+    <h1>Escolha seu Pokémon</h1>
+    <form action="/buscar" method="post" aria-label="Formulário de busca">
+        <label for="nome">Nome do Pokémon</label>
+        <input id="nome" name="nome" type="text" placeholder="ex: pikachu" autocomplete="off" />
+        <button type="submit" aria-label="Buscar Pokémon">Buscar</button>
+    </form>
+</div>
+
+{% if pokemon %}
+<article class="pokemon-card {{ pokemon.tipo[0] if pokemon.tipo }}" role="region" aria-label="Informações do Pokémon">
+    <div class="pokemon-main">
+        <h2>{{ pokemon.nome | capitalize }}</h2>
+        {% if pokemon.foto %}
+        <img src="{{ pokemon.foto }}" alt="Imagem de {{ pokemon.nome }}" class="pokemon-image" />
+        {% endif %}
+        {% if pokemon.cry %}
+        <audio controls>
+            <source src="{{ pokemon.cry }}" type="audio/ogg">
+            Seu navegador não suporta áudio.
+        </audio>
+        {% endif %}
+        <div class="pokemon-types">{{ pokemon.tipo | join(", ") }}</div>
+    </div>
+
+    <div class="pokemon-info">
+        <p><strong>Espécie:</strong> {{ pokemon.species }}</p>
+        <p><strong>Altura:</strong> {{ pokemon.height }}</p>
+        <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+        {% if pokemon.abilities %}
+        <p><strong>Habilidades:</strong> {{ pokemon.abilities | join(", ") }}</p>
+        {% endif %}
+
+        <div class="stats-container">
+            <h3 style="margin:6px 0 8px">Stats</h3>
+            {% for stat, valor in pokemon.stats.items() %}
+            <div class="stat-row">
+                <div class="stat-name">{{ stat | replace('-', ' ') | capitalize }}</div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: {{ (valor if valor <= 100 else 100) }}%;"></div>
+                </div>
+                <div class="stat-value">{{ valor }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</article>
+{% elif message %}
+<div class="message">{{ message }}</div>
+{% endif %}
+
+<script>
+window.addEventListener('load', function(){
+    document.querySelectorAll('.stat-fill').forEach(function(el){
+        var w = el.style.width || '0%';
+        el.style.width = '0%';
+        requestAnimationFrame(function(){ el.style.width = w; });
+    });
+});
+</script>
+</body>
+</html>
