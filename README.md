@@ -10,7 +10,7 @@ Uma Pokédex web interativa feita em **Flask** que permite buscar e visualizar i
 - Exibir imagem, tipo, altura, peso e espécie.
 - Mostrar habilidades e estatísticas detalhadas.
 - Tocar o "cry" do Pokémon (quando disponível).
-- Interface responsiva e estilizada com CSS moderno.
+- Interface responsiva e estilizada com CSS3.
 
 ---
 
