@@ -31,19 +31,6 @@ Uma aplicação web simples de **Pokédex** construída com **Flask**, que permi
 
 ---
 
-## Estrutura do Projeto
-
-pokedex/
-├── pokedex.py # Aplicação Flask
-├── templates/
-│ └── pokedex.html # Template principal
-├── static/
-│ └── style.css # Estilos CSS
-└── README.md
-
-
----
-
 ## Instalação
 
 1. Clone este repositório:
