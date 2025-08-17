@@ -10,7 +10,7 @@ def obter_dados_pokemon(nome_pokemon):
         return response.json()
     return None
 
-@app.route("/home")
+@app.route("/")
 def home():
     return render_template('pokedex.html', pokemon=None, message=None)
 
