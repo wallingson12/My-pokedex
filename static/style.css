@@ -25,7 +25,7 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: 'Inter', Arial, sans-serif;
-    background-color: #888888;
+    background: linear-gradient(to bottom, #f0f0f0, #dcdcdc);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,16 +96,18 @@ button:active { transform: translateY(1px); }
     gap: 18px;
     align-items: center;
     overflow: hidden;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.25);
     backdrop-filter: blur(18px) saturate(180%);
     border: 1px solid rgba(255,255,255,0.25);
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: #222;
 }
+
 .pokemon-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* Coluna esquerda */
@@ -137,6 +139,12 @@ button:active { transform: translateY(1px); }
     align-items: center;
     margin: 6px 0;
 }
+
+.stat-row:hover .stat-fill {
+    background-color: #f5c518; /* destaque amarelo */
+    transition: background-color 0.3s;
+}
+
 .stat-name { min-width: 90px; font-size:0.95rem; text-transform:capitalize; }
 .stat-bar {
     flex: 1;
@@ -150,29 +158,44 @@ button:active { transform: translateY(1px); }
     height: 100%;
     width: 0%;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.4));
+    background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255));
     transition: width 0.7s ease;
 }
 .stat-value { min-width: 36px; text-align:right; font-weight:700; }
 
 /* Degradês por tipo */
-.fire { background: linear-gradient(135deg, #F08030, #FFA050); }
+.fire { background: linear-gradient(135deg, #F08030, #FFA050);
+ color: white;}
 .electric { background: linear-gradient(135deg, #F8D030, #FFEB64); }
-.water { background: linear-gradient(135deg, #6890F0, #5ABEFF); }
-.grass { background: linear-gradient(135deg, #78C850, #A0F078); }
-.poison { background: linear-gradient(135deg, #A040A0, #DC78DC); }
+.water { background: linear-gradient(135deg, #6890F0, #5ABEFF);
+color: white;}
+.grass { background: linear-gradient(135deg, #78C850, #A0F078);
+color: white;}
+.poison { background: linear-gradient(135deg, #A040A0, #DC78DC);
+color: white;}
 .ice { background: linear-gradient(135deg, #98D8D8, #BEFAFA); }
-.fighting { background: linear-gradient(135deg, #C03028, #FA5A46); }
-.ground { background: linear-gradient(135deg, #E0C068, #FAE696); }
-.flying { background: linear-gradient(135deg, #A890F0, #D2C8FF); }
-.psychic { background: linear-gradient(135deg, #F85888, #FF96C8); }
-.bug { background: linear-gradient(135deg, #A8B820, #DCF05A); }
-.rock { background: linear-gradient(135deg, #B8A038, #E6D278); }
-.ghost { background: linear-gradient(135deg, #705898, #AA8CDC); }
-.dragon { background: linear-gradient(135deg, #7038F8, #B478FF); }
-.dark { background: linear-gradient(135deg, #705848, #A08264); }
-.steel { background: linear-gradient(135deg, #B8B8D0, #E6E6FA); }
-.fairy { background: linear-gradient(135deg, #EE99AC, #FFD2E6); }
+.fighting { background: linear-gradient(135deg, #C03028, #FA5A46);
+color: white;}
+.ground { background: linear-gradient(135deg, #E0C068, #FAE696);
+color: white;}
+.flying { background: linear-gradient(135deg, #A890F0, #D2C8FF);
+color: white;}
+.psychic { background: linear-gradient(135deg, #F85888, #FF96C8);
+color: white;}
+.bug { background: linear-gradient(135deg, #A8B820, #DCF05A);
+color: white;}
+.rock { background: linear-gradient(135deg, #B8A038, #E6D278);
+color: white;}
+.ghost { background: linear-gradient(135deg, #705898, #AA8CDC);
+color: white;}
+.dragon { background: linear-gradient(135deg, #7038F8, #B478FF);
+color: white;}
+.dark { background: linear-gradient(135deg, #705848, #A08264);
+color: white;}
+.steel { background: linear-gradient(135deg, #B8B8D0, #E6E6FA);
+color: white;}
+.fairy { background: linear-gradient(135deg, #EE99AC, #FFD2E6);
+color: white;}
 
 /* Responsividade */
 @media (max-width: 720px) {
