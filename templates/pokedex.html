@@ -48,7 +48,7 @@
             <div class="stat-row">
                 <div class="stat-name">{{ stat | replace('-', ' ') | capitalize }}</div>
                 <div class="stat-bar">
-                    <div class="stat-fill" style="width: {{ (valor if valor <= 100 else 100) }}%;"></div>
+                    <div class="stat-fill {{ tipo }}" style="width: {{ (valor if valor <= 100 else 100) }}%;"></div>
                 </div>
                 <div class="stat-value">{{ valor }}</div>
             </div>
@@ -61,11 +61,23 @@
 {% endif %}
 
 <script>
+<!-- Quando a página terminar de carregar-->
 window.addEventListener('load', function(){
-    document.querySelectorAll('.stat-fill').forEach(function(el){
-        var w = el.style.width || '0%';
+
+<!-- Seleciona todos os elementos com a classe "stat-fill"-->
+    const fills = document.querySelectorAll('.stat-fill');
+
+<!-- Pega a largura atual do elemento (ou '0%' se não estiver definida)-->
+    fills.forEach((el, i) => {
+        const w = el.style.width || '0%';
+
+<!-- Inicialmente define a largura como 0%-->
         el.style.width = '0%';
-        requestAnimationFrame(function(){ el.style.width = w; });
+
+<!--Depois de um tempo (i * 200ms), anima a largura até o valor original-->
+        setTimeout(() => {
+            el.style.width = w;
+        }, i * 200);
     });
 });
 </script>
